@@ -197,13 +197,44 @@ async function start() {
     )
   );
 
-  // Ask questions
+  process.on("exit", () => {
+    console.log(
+      "\n" +
+        boxen(chalk.yellow("👋 You pressed Ctrl+C — Exiting Sumit CLI..."), {
+          padding: 1,
+          borderStyle: "round",
+          borderColor: "red"
+        }) +
+        "\n"
+    );
+    process.exit(0);
+  });
+
+
+  // Ask 
+  // 
+  // questions
   const answers = await inquirer.prompt([
     { name: "name", message: "Enter prompt" },
   ]);
 
   // Run placeholder
   await main(answers.name);
+  exitHandler();
 }
+
+function exitHandler() {
+  console.log(
+    "\n" +
+      boxen(chalk.yellow("👋 Exiting Sumit CLI... Goodbye!"), {
+        padding: 1,
+        borderStyle: "round",
+        borderColor: "red"
+      }) +
+      "\n"
+  );
+  process.exit(0);
+}
+
 
 start();
