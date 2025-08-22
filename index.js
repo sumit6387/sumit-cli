@@ -214,12 +214,17 @@ async function start() {
   // Ask 
   // 
   // questions
-  const answers = await inquirer.prompt([
-    { name: "name", message: "Enter prompt" },
-  ]);
-
-  // Run placeholder
-  await main(answers.name);
+  while (true) {
+    console.log("\n\n");
+    const answers = await inquirer.prompt([
+      { name: "name", message: "Enter prompt" },
+    ]);
+    if(answers.name == "exit"){
+      break;
+    }
+    // Run placeholder
+    await main(answers.name);
+  }
   exitHandler();
 }
 
